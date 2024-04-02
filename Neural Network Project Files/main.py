@@ -118,17 +118,6 @@ def updateColorGrid(pos):
     if (coord[0] >= DIMENSION - 1 or coord[1] >= DIMENSION - 1 or coord[0] <= 0 or coord[1] <= 0):
         return
     COLOR_GRID[coord[1]][coord[0]] = 255 
-    #COLOR_GRID[coord[1] - 1][coord[0]] = max(COLOR_GRID[coord[1] - 1][coord[0]], 200 * inpixel_positions[0])
-    #COLOR_GRID[coord[1]][coord[0] + 1] = max(COLOR_GRID[coord[1]][coord[0] + 1], 200 * inpixel_positions[1])
-    #COLOR_GRID[coord[1] + 1][coord[0]] = max(COLOR_GRID[coord[1] + 1][coord[0]], 200 * inpixel_positions[2])
-    #COLOR_GRID[coord[1]][coord[0] - 1] = max(COLOR_GRID[coord[1]][coord[0] - 1], 200 * inpixel_positions[3])
-
-    '''
-    COLOR_GRID[coord[1] - 1][coord[0] + 1] = max(COLOR_GRID[coord[1] - 1][coord[0] + 1], 200 * inpixel_positions[0] * inpixel_positions[1])
-    COLOR_GRID[coord[1] + 1][coord[0] + 1] = max(COLOR_GRID[coord[1] + 1][coord[0] + 1], 200 * inpixel_positions[1] * inpixel_positions[2])
-    COLOR_GRID[coord[1] + 1][coord[0] - 1] = max(COLOR_GRID[coord[1] + 1][coord[0] - 1], 200 * inpixel_positions[2] * inpixel_positions[3])
-    COLOR_GRID[coord[1] - 1][coord[0] - 1] = max(COLOR_GRID[coord[1] - 1][coord[0] - 1], 200 * inpixel_positions[3] * inpixel_positions[0])
-    '''
 
 def updateColorGridMissed(last, curr):
     lastCoord = convertPosToPixel(last)
@@ -178,26 +167,6 @@ circle_positions = []
 def DisplayStats(stats):
     stats *= 100
     stats = np.floor(stats)
-    '''
-    sorted_stats = []
-    stats_labels = []
-    print(stats)
-    for i in range(9):
-        max = 0
-        for j in range(len(stats)):
-            if (stats[j] > stats[max]):
-                max = j
-        sorted_stats.append(stats[max])
-        stats_labels.append(max)
-        stats = np.delete(stats, max)
-        print(np.delete(stats, max))
-
-
-    print(stats)
-    print(sorted_stats)
-    print(stats_labels)
-    '''
-    
     
 
     stats_screen.fill((0, 0, 0))
@@ -219,20 +188,7 @@ def DisplayStats(stats):
 
 drawBorder()
 total_data = 800000
-'''
 
-inputs = np.abs(np.ceil(.01 * np.random.randn(total_data,4)))
-#print(inputs)
-labels = np.zeros((total_data, 1))
-for i in range(len(inputs)):
-    #print(inputs[i])
-    if (((inputs[i][0] == 1 and inputs[i][3] == 1) or (inputs[i][1] == 1 and inputs[i][2] == 1))):
-        labels[i][0] = 1
-    #print(labels[i])
-
-nn.InitializeNeuralNetworkLayers([4, 3, 2])
-nn.RunNeuralNetwork([np.array([1, 0, 0, 1])], [0], 1, 1, 1)
-'''
 
 nn.InitializeNeuralNetworkLayers([784, 100, 50, 6])
 nn.RunNeuralNetwork(train_X, train_y, total_data, 200, .01)
